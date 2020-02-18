@@ -1,0 +1,8 @@
+<!-- 
+<div  fxLayoutAlign="stretch stretch" *ngIf="alert">
+<ngb-alert [type]="alert.type" (close)="closeAlert()" >{{ alert.message }}</ngb-alert>
+</div>
+-->
+<div *ngIf="alert">
+<ngb-alert [type]="alert.type" (close)="onCloseAlert()" >{{ alert.message }}</ngb-alert>
+</div>
