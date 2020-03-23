@@ -1,0 +1,25 @@
+
+@media screen and (min-width: 645px)
+{
+    #screen-small {
+        visibility: hidden;
+        height: 0;
+    }
+
+    #screen-large {
+        visibility: visible;
+    }
+}
+
+@media screen and (max-width: 644px)
+{
+    #screen-small {
+        visibility: visible;
+        
+    }
+
+    #screen-large {
+        visibility: hidden;
+        height: 0;
+    }
+}

@@ -1,0 +1,183 @@
+<mdb-navbar class="navCss"
+            SideClass="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar ie-nav justify-content-start" [containerInside]="false" >
+
+        <logo>
+            <a class="navbar-brand" href="http://www.liwa.be" target="_blank"> <img class="bpost-logo" 
+                [src]="'./assets/img/logo_liwa_2020.png'" alt="logo" title="CTT Limal-Wavre - BBW123" width="50px"
+                height="40px" (click)="onLogoClicked()" />
+            </a>
+        </logo>
+
+        <links>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item  waves-light" mdbWavesEffect>
+                    <a class="nav-link" routerLinkActive="active" routerLink="/">Accueil<span class="sr-only">(current)</span></a>
+                </li>
+
+                <!-- <li class="nav-item dropdown btn-group" dropdown>
+                    <button href="#" type="button" id="dropdown" data-toggle="dropdown"
+                      class=" btn btn-primary dropdown-toggle multi-level-dropdown" aria-haspopup="true"
+                      aria-expanded="false">Click me</button>
+                    <ul style="list-style-type:none" class="dropdown-menu mt-2 rounded-0 white border-0 z-depth-1">
+                      <li class="dropdown-item dropdown-submenu p-0">
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle dropdown-item w-100">Click Me! </a>
+                        <ul class="dropdown-menu  rounded-0 white border-0 z-depth-1">
+                          <li class="dropdown-item p-0">
+                            <a href="#" class="dropdown-item w-100">Hey</a>
+                          </li>
+                          <li class="dropdown-item p-0">
+                            <a href="#" class="dropdown-item w-100">Hi</a>
+                          </li>
+                          <li class="dropdown-item p-0">
+                            <a href="#" class="dropdown-item w-100">Hello</a>
+                          </li>
+                        </ul>
+                      </li>
+                      <li class="dropdown-item dropdown-submenu p-0">
+                        <a href="#" data-toggle="dropdown" class="dropdown-toggle dropdown-item w-100">Click Me Too! </a>
+                        <ul class="dropdown-menu mr-2 rounded-0  white border-0 z-depth-1 r-100">
+                          <li class="dropdown-item p-0">
+                            <a href="#" class="dropdown-item w-100">How</a>
+                          </li>
+                          <li class="dropdown-item p-0">
+                            <a href="#" class="dropdown-item w-100">are</a>
+                          </li>
+                          <li class="dropdown-item dropdown-submenu p-0">
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle dropdown-item w-100">Click Me Too! </a>
+                            <ul style="list-style-type:none"
+                              class="dropdown-menu mr-2 rounded-0 white border-0 z-depth-1 r-100 ">
+                              <li class="dropdown-item p-0">
+                                <a href="#" class="dropdown-item w-100">How</a>
+                              </li>
+                              <li class="dropdown-item p-0">
+                                <a href="#" class="dropdown-item w-100">are</a>
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li> -->
+
+                <!-- <li class="nav-item  waves-light" mdbWavesEffect *ngIf=" ! getAuthService().isUserAdmin()">
+                    <a class="nav-link" routerLinkActive="active"  routerLink="competition/liste" *ngIf="isSaisonActive()">
+                        Compétitions</a>
+                        <div class="divider dropdown-divider"></div>
+                </li> -->
+    
+                <li class="nav-item dropdown btn-group" dropdown >
+                    <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+                        Club
+                    </a>
+                    <div class="dropdown-menu dropdown-primary dropdown-menu-right" role="menu">
+                        <a class="dropdown-item" routerLinkActive="active" routerLink="competition/liste">Les membres</a>
+                        <a class="dropdown-item" routerLinkActive="active" routerLink="competition/liste">Devenir membre</a>
+                        <div class="divider dropdown-divider"></div>
+                        <a class="dropdown-item" routerLinkActive="active" routerLink="competition/liste">Local</a>
+                        <a class="dropdown-item" routerLinkActive="active" routerLink="tournoi/new">Comité et organisation</a>
+                        <a class="dropdown-item" routerLinkActive="active" routerLink="criterium/new">Statuts</a>
+                        <a class="dropdown-item" routerLinkActive="active" routerLink="coupe/new">Réglement Ordre Intérieur</a>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown btn-group" dropdown >
+                    <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+                        Compétitions
+                    </a>
+                    <div class="dropdown-menu dropdown-primary dropdown-menu-right" role="menu">
+                        <a class="dropdown-item" routerLinkActive="active" routerLink="competition/liste">Messieurs/Dames</a>
+                        <a class="dropdown-item" routerLinkActive="active" routerLink="competition/liste">Aînées</a>
+                        <a class="dropdown-item" routerLinkActive="active" routerLink="competition/liste">Vétérans</a>
+                        <div class="divider dropdown-divider"></div>
+                        <a class="dropdown-item" routerLinkActive="active" routerLink="tournoi/new">Listes des forces</a>
+                        <a class="dropdown-item" routerLinkActive="active" routerLink="criterium/new">Challenge</a>
+                        <a class="dropdown-item" routerLinkActive="active" routerLink="coupe/new">Adresses des clubs</a>
+                        <div class="divider dropdown-divider"></div>
+                        <a class="dropdown-item" routerLinkActive="active" routerLink="competition/liste">Tournoi</a>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown btn-group" dropdown >
+                    <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+                        Activités
+                    </a>
+                    <div class="dropdown-menu dropdown-primary dropdown-menu-right" role="menu">
+                        <a class="dropdown-item" routerLinkActive="active" routerLink="competition/liste">Entraînements</a>
+                        <a class="dropdown-item" routerLinkActive="active" routerLink="competition/liste">Stages</a>
+                    </div>
+                </li>
+
+                <li class="nav-item  waves-light" mdbWavesEffect>
+                    <a class="nav-link" routerLinkActive="active" routerLink="/">Prix<span class="sr-only">(current)</span></a>
+                </li>
+
+                <li class="nav-item  waves-light" mdbWavesEffect>
+                    <a class="nav-link" routerLinkActive="active" routerLink="/">Documents<span class="sr-only">(current)</span></a>
+                </li>
+
+                <li class="nav-item  waves-light" mdbWavesEffect>
+                    <a class="nav-link" routerLinkActive="active" routerLink="/">Sponsors<span class="sr-only">(current)</span></a>
+                </li>
+
+                <li class="nav-item  waves-light" mdbWavesEffect>
+                    <a class="nav-link" routerLinkActive="active" routerLink="/">Contact<span class="sr-only">(current)</span></a>
+                </li>
+                    
+                <!-- ADMIN Dropdown -->
+                <li class="nav-item dropdown btn-group" dropdown *ngIf="getAuthService().isUserAdmin()">
+                    <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+                        Admin
+                    </a>
+                    <div class="dropdown-menu dropdown-primary dropdown-menu-right" role="menu">
+                        <a class="dropdown-item" routerLinkActive="active" routerLink="admin/initdata" *ngIf="getAuthService().isUserSuperAdmin()">Init Data</a>
+                        <a class="dropdown-item" routerLinkActive="active" routerLink="admin/province">Provinces</a>
+                        <a class="dropdown-item" routerLinkActive="active" routerLink="admin/saisons">Saisons</a>
+                        <a class="dropdown-item" routerLinkActive="active" routerLink="admin/saison/add">Nouvelle Saison</a>
+                        <a class="dropdown-item" routerLinkActive="active" routerLink="tournoi/tournois" *ngIf="isSaisonActive()">Tournois</a>
+                        <a class="dropdown-item" routerLinkActive="active" routerLink="tournoi/new" *ngIf="isSaisonActive()">Nouveau tournoi</a>
+                        <a class="dropdown-item" routerLinkActive="active" routerLink="admin/arbitres">Arbitres</a>
+                        <a class="dropdown-item" routerLinkActive="active" routerLink="admin/manage">Manage Profils et Inscriptions</a>
+                        <a class="dropdown-item" routerLinkActive="active" routerLink="admin/export">Exporter les résultats</a>
+                        <div class="divider dropdown-divider"></div>
+                        <a class="dropdown-item" routerLinkActive="active" routerLink="admin/aft">AFT Test</a>
+                        <a class="dropdown-item" routerLinkActive="active" routerLink="admin/vttl">VTTL Test</a>
+                        <div class="divider dropdown-divider"></div>
+                        <a class="dropdown-item" routerLinkActive="active" routerLink="devStatus">Dev status</a>
+                    </div>
+                </li>
+                    
+                <!-- TESTS Dropdown -->
+                <!-- <li class="nav-item dropdown btn-group" dropdown *ngIf="getAuthService().isUserAdmin()">
+                    <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+                        Tests
+                    </a>
+                    <div class="dropdown-menu dropdown-primary dropdown-menu-right" role="menu">
+
+                        <a class="dropdown-item" routerLinkActive="active" routerLink="admin/test/aft">AFT Test</a>
+                        <a class="dropdown-item" routerLinkActive="active" routerLink="admin/test/vttl">VTTL Test</a>
+                        <div class="divider dropdown-divider" ></div>
+                        <a class="dropdown-item" routerLinkActive="active" routerLink="admin/test/ckeditor">CK Editor test</a> 
+                            <div class="divider dropdown-divider" ></div>
+                        <a class="dropdown-item" routerLinkActive="active" routerLink="test">Test</a>
+                        
+                    </div>
+                </li> -->
+                    
+                    
+            </ul>
+
+            <ul class="navbar-nav nav-flex-icons">
+                
+                <li class="nav-item waves-light" mdbWavesEffect *ngIf=" ! user " routerLink="login">
+                    <a class="nav-link"><i class="fa fa-sign-in"></i> Login</a>
+                </li>
+                
+                <li class="nav-item waves-light" mdbWavesEffect *ngIf=" user " (click)="onLogout($event)">
+                    <a class="nav-link">Logout <i class="fa fa-sign-out"></i></a>
+                </li>
+                    
+            </ul>
+        </links>
+</mdb-navbar>
+
+

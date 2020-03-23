@@ -1,0 +1,28 @@
+<div *ngIf="teams">
+        <h5>Les équipes:</h5>
+        <br>
+        <table mdbTable small="true" hover="true">
+            <thead>
+              <tr>
+                <th>N°</th>
+                <th>TeamID</th>
+                <th>Team</th>
+                <th>DivisionID</th>
+                <th>Equipe</th>
+                <th>Cat</th>
+                <th>Match type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr mdbTableCol *ngFor="let el of teams; let ix=index">
+                <th scope="row">{{ix+1}}</th>
+                <th>{{el.TeamId}}</th>
+                <td>{{el.Team}}</td>
+                <td>{{el.DivisionId}}</td>
+                <td>{{el.DivisionName}}</td>
+                <td>{{el.DivisionCategory}}</td>
+                <td>{{el.MatchType}}</td>
+              </tr>
+            </tbody>
+          </table>
+</div>

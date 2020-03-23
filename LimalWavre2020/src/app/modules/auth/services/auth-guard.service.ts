@@ -15,7 +15,9 @@ export class AuthGuardService implements CanActivate  {
 
   async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
     const redirectUrl = route.data.authGuardRedirect;
-
+    return true;
+    
+    /*
     if (await this.authService.checkTokenStatus()) {
       const user: AuthenticatedUserModel = this.authService.getCurrentUser();
       if (!(user.authUserGroup.authGroup.authGroupRole.find(role => {
@@ -35,6 +37,7 @@ export class AuthGuardService implements CanActivate  {
       }
       return false;
     }
+    */
   }
 
 }

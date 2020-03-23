@@ -20,6 +20,10 @@ import { MessageModel } from '../../../common/model/message.model';
 })
 export class AuthService {
 
+    // tslint:disable-next-line:variable-name
+    private _user: AuthenticatedUserModel = null;
+    private preLoginuser: AuthenticatedUserModel = null;
+
     public userEvents = new BehaviorSubject<AuthenticatedUserModel>(undefined);
 
     constructor(
@@ -68,19 +72,22 @@ export class AuthService {
       }
     }
 
-    isTokenExpired(): boolean {
+    isTokenExpired(): boolean 
+    {
       // Note: Assumption is token exists. Do is tokenExists check first
       const tokens = this.getTokens();
       return this.jwtHelperService.isTokenExpired(tokens.accessToken);
     }
 
-    getTokens(): any {
+    getTokens(): any 
+    {
       const accessToken = localStorage.getItem('access_token');
       const refreshToken = localStorage.getItem('refresh_token');
       return { accessToken, refreshToken };
     }
 
-    getCurrentUser(): AuthenticatedUserModel {
+    getCurrentUser(): AuthenticatedUserModel 
+    {
       let user = this.getUserFromStore();
       if (!user && localStorage.getItem('user') ) {
         const u: AuthUserModel = JSON.parse(localStorage.getItem('user'));
@@ -93,17 +100,27 @@ export class AuthService {
       return user;
     }
 
-    login(username: string, password: string): Observable<AuthenticatedUserModel> {
+    login(username: string, password: string): Observable<AuthenticatedUserModel> 
+    {
       const url=`${environment.apiUrl}`;  
       const apiUrl = `${url}/auth/login/`;
       return this.httpClient.post<AuthenticatedUserModel>(apiUrl, { username, password });
     }
 
-    logout() {
+    logout() 
+    {
       this.postProcessLogin(null);
     }
 
+    changePassword(username: string, password: string, jeton: string): Observable<AuthenticatedUserModel> 
+    {
+      const url=`${environment.apiUrl}`;  
+      const apiUrl = `${url}/auth/changePassword/`;
+      return this.httpClient.post<AuthenticatedUserModel>(apiUrl, { username, password, jeton });
+    }
+
     postProcessLogin(user: AuthenticatedUserModel) {
+      this._user=user;
       if (user) {
         this.store.dispatch( new LoginAction({user}) );
       }
@@ -122,8 +139,18 @@ export class AuthService {
         //this.store.dispatch( new CalendarInitAction());
         //this.languageService.determineDefaultLanguage();
       }
+      
     }
 
+    preProcessLogin(user: AuthenticatedUserModel) 
+    {
+      this.preLoginuser=user;
+    }
+
+    getPreLoginUser(): AuthenticatedUserModel
+    {
+      return this.preLoginuser;
+    }
 
     refreshToken(refreshToken: string): Observable<any> {
       const url=`${environment.apiUrl}`;  
@@ -151,15 +178,30 @@ export class AuthService {
         return this.httpClient.post<MessageModel>( apiUrl, postData );
     }
 
-    isUserAdmin(): boolean
-    {
-      console.warn('function still not implemented !!!');
-      return true;
-    }
-
     isUserSuperAdmin(): boolean
     {
-      console.warn('function still not implemented !!!');
-      return false;
+      return this.isUserClubAdmin() && this.isUserStageAdmin() && this.isUserEntrainementAdmin();
     }
+
+    isUserClubAdmin(): boolean
+    {
+      if(this._user===null) return false;
+      const role=this._user.roles.find( r => r.authDomain.domain==='club' && r.role==='admin');
+      return role !==null && role !== undefined;
+    }
+
+    isUserStageAdmin(): boolean
+    {
+      if(this._user===null) return false;
+      const role=this._user.roles.find( r => r.authDomain.domain==='stage' && r.role==='admin');
+      return role !==null && role !== undefined;
+    }
+
+    isUserEntrainementAdmin(): boolean
+    {
+      if(this._user===null) return false;
+      const role=this._user.roles.find( r => r.authDomain.domain==='entrainement' && r.role==='admin');
+      return role !==null && role !== undefined;
+    }
+
 }

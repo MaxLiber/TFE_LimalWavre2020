@@ -61,33 +61,34 @@ export class LoginComponent implements OnInit
       this.loginForm.value.password
     )
     .subscribe( 
-        user => {
+        (user: AuthenticatedUserModel) => {
               console.log('login ok', user);
-              console.warn('login post process NOT called!');
-              this.toastMessageService.addSuccess('Login', 'Bonjour '+user.firstname);
-              this.router.navigate(['default']);
-              //this.postLogin(user);
+              if(user.mustChangePassword===true)
+              {
+                this.toastMessageService.addWarn('Login', 'Bonjour '+user.prenom+', changement de mot de passe obligatoire!');
+                this.router.navigate(['auth', 'changePassword']);
+                this.preLogin(user);
+              }
+              else
+              {
+                // console.warn('login post process NOT called!');
+                this.toastMessageService.addSuccess('Login', 'Bonjour '+user.prenom);
+                this.router.navigate(['default']);
+                this.postLogin(user);
+              }
             }
       ,
         err =>{
-          //console.error('login fails',err );
-          const error=err.error;
-          const status=err.status;
-          if(status===409)
-          {
-              //this.message=this.error_AccountStillNotActivated; // 'Account still not activated !';
-              this.error='AccountStillNotActivated';
-          }
-          else
-          {
-              //this.message='Invalid user or password';
-              this.error='InvalidUserOrPassword';
-          }
-            
-          console.error('login fails - '+this.error, err );
+          this.error='InvalidUserOrPassword';
+          console.error('login fails - '+err.error.message, err );
         }
     );
     
+  }
+
+  preLogin( user: AuthenticatedUserModel)
+  {
+    this.authService.preProcessLogin(user);
   }
 
   postLogin( user: AuthenticatedUserModel)

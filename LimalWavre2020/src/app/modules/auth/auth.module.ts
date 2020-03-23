@@ -12,14 +12,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { LoginComponent } from './login/login.component';
 import { MdBootstrapProModule } from '../../modules.vendors/mdbootstrap/md-bootstrap-pro.module';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
 //import { ComTranslateModule } from '../../modules.vendors/com.translate/com.translate.module';
 
 @NgModule({
   declarations: [
     LoginComponent,
+    ChangePasswordComponent,
   ],
   imports: [
     CommonModule,
+    PasswordStrengthMeterModule,
     AuthRoutingModule,
     // ComTranslateModule,
     MaterialModule,

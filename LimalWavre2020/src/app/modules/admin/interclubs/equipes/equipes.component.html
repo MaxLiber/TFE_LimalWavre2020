@@ -1,0 +1,39 @@
+<button mdbBtn type="button" gradient="purple" size="sm" mdbWavesEffect (click)="onLoadEquipesFromAftt()">Charger les équipes - AFTT</button>
+
+<div *ngIf="afttClubTeamModel">
+    <h5>Infos club:</h5>
+    Nom du club: {{ afttClubTeamModel.ClubName }} <br>
+    Nombre d'équipes: {{ afttClubTeamModel.TeamCount }} <br>
+    <br>
+
+    
+    <!-- {{ afttClubTeamModel.TeamEntries | json }} -->
+    <div *ngIf="afttClubTeamModel.TeamEntries">
+        <h5>Les équipes:</h5>
+        <br>
+        <table mdbTable small="true" hover="true">
+            <thead>
+              <tr>
+                <th>N°</th>
+                <th>TeamID</th>
+                <th>Team</th>
+                <th>DivisionID</th>
+                <th>Equipe</th>
+                <th>Cat</th>
+                <th>Match type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr mdbTableCol *ngFor="let el of afttClubTeamModel.TeamEntries; let ix=index">
+                <th scope="row">{{ix+1}}</th>
+                <th>{{el.TeamId}}</th>
+                <td>{{el.Team}}</td>
+                <td>{{el.DivisionId}}</td>
+                <td>{{el.DivisionName}}</td>
+                <td>{{el.DivisionCategory}}</td>
+                <td>{{el.MatchType}}</td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+</div>
