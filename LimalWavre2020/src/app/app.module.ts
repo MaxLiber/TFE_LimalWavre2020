@@ -46,6 +46,8 @@ import { AppCommonModule } from './modules/common/app-common.module';
 import { AdminModule } from './modules/admin/admin.module';
 import { ContactModule } from './modules/contact/contact.module';
 import { SponsorsModule } from './modules/sponsors/sponsors.module';
+import { PrixModule } from './modules/prix/prix.module';
+import { LocalModule } from './modules/local/local.module';
 // import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
 //import { MDBSpinningPreloader } from 'ng-uikit-pro-standard';
 //import { ButtonsModule, WavesModule, CollapseModule } from 'ng-uikit-pro-standard'
@@ -96,6 +98,8 @@ import { SponsorsModule } from './modules/sponsors/sponsors.module';
     AdminModule,
     ContactModule,
     SponsorsModule,
+    PrixModule,
+    LocalModule,
     // Import the app routing module after the other app modules, so that the routes are merged
     AppRoutingModule, 
   ],
