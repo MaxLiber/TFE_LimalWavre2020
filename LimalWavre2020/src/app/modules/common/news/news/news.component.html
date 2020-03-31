@@ -1,0 +1,55 @@
+
+<div class="row">
+
+    <!-- Grid column -->
+    <div class="col-lg-5 col-xl-4">
+
+      <!-- Featured image -->
+      <div class="view overlay rounded z-depth-1-half mb-lg-0 mb-4 waves-light news-image" mdbWavesEffect>
+        <!-- <img class="img-fluid" [src]="imageUrl" alt="Sample image"> -->
+
+        <img class="img-fluid news-image" [src]="imageUrl" alt="Place image title" *ngIf="!isImageLoading && imageUrl!==null; else noImageFound">
+        <ng-template #noImageFound>
+            <img class="img-fluid news-image" [src]="noImageUrl" alt="Fallbackimage">
+        </ng-template>
+
+        <a>
+          <div class="mask rgba-white-slight"></div>
+        </a>
+      </div>
+
+    </div>
+    <!-- Grid column -->
+
+    <!-- Grid column -->
+    <div class="col-lg-7 col-xl-8">
+
+      <!-- Post title -->
+      <h3 class="font-weight-bold mb-3"><strong>{{news.title}}</strong></h3>
+      <!-- Excerpt -->
+      <p class="dark-grey-text">{{news.presentation}}.</p>
+      <!-- Post data -->
+      <p *ngIf="news.auteur">Par: <a class="font-weight-bold">{{news.auteur.prenom + ' ' + news.auteur.nom}} &nbsp;</a>, {{ news.createdAt | date:'dd/MM/yyyy HH:mm' }}</p>
+      <!-- Read more button -->
+      
+      <!-- <a mdbBtn color="primary" mdbWavesEffect *ngIf="news.document" (click)="onShowNewsDetails()">Lire la suite...</a> -->
+
+      <button class="btn btn-sm btn-default" *ngIf="news.document" (click)="onShowNewsDetails()">Lire la suite...</button>
+
+        <div *ngIf="context==='Admin'">
+            <hr>
+            <p class="dark-grey-text">Statut de la news: {{news.status}}.</p>
+            <p class="dark-grey-text">Ordre de la news:{{news.showOrder}}.</p>
+            <p class="dark-grey-text">ID: {{news.id}}.</p>
+
+            <button class="btn btn-sm" *ngIf="isNewsVisible()===true" (click)="onShowNews(false)">Cacher la news</button>
+            <button class="btn btn-sm" *ngIf="isNewsVisible()===false" (click)="onShowNews(true)">Afficher la news</button>
+            <button class="btn btn-sm" (click)="onDeleteNews()">Supprimer la news</button>
+            <button class="btn btn-sm" (click)="onEditNews()">Editer la news</button>
+            <button class="btn btn-sm" (click)="onSetNewsTopPriority()">Top priority</button>
+
+        </div>
+    </div>
+    <!-- Grid column -->
+
+  </div>

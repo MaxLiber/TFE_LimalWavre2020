@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit, OnDestroy
   {
     this.userEvenSubscription=this.authService.userEvents.subscribe(
       event => {
-        console.log('User event:' + event);
+        //console.log('User event:' + event);
         if(event!=null && this.authService.isUserClubAdmin)
         {
           this.editPageAllowed=true;

@@ -30,7 +30,7 @@ import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
     PrimengModule,
     MdBootstrapProModule,
 
-    StoreModule.forFeature('authModule', {authReducer} ),
+    StoreModule.forFeature('authModule', authReducer ),
 
     FormsModule,
     FlexLayoutModule,

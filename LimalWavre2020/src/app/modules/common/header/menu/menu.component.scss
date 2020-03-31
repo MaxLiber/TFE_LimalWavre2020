@@ -8,9 +8,10 @@ body {
     font-family: "Roboto Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     font-family: "Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; }
 */
-.ecartGauche {
-  padding-left: 10%;
-  max-width : 5em;
+
+#navbarDropdownMenuLink {
+  color: white; 
+  font-weight: 400;
 }
 
 ::-moz-selection {

@@ -73,8 +73,8 @@ export class LoginComponent implements OnInit
               {
                 // console.warn('login post process NOT called!');
                 this.toastMessageService.addSuccess('Login', 'Bonjour '+user.prenom);
-                this.router.navigate(['default']);
                 this.postLogin(user);
+                this.router.navigate(['default']);
               }
             }
       ,

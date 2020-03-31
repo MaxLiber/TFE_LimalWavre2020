@@ -6,7 +6,7 @@ import { TokensModel } from '../model/tokens.model';
 import { HttpClient } from '@angular/common/http';
 import { Store, select } from '@ngrx/store';
 import { selectAuthenticatedUser } from '../state/selectors/auth.selectors';
-import { take } from 'rxjs/operators';
+import { take, map } from 'rxjs/operators';
 
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { LoginAction } from '../state/actions/auth-login.action';
@@ -14,6 +14,7 @@ import { AppState } from '../../../state/app.state';
 import { AuthUserModel } from '../model/auth-user.model';
 import { environment } from '../../../../environments/environment';
 import { MessageModel } from '../../../common/model/message.model';
+import { LogoutAction } from '../state/actions/auth-logout.action';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ import { MessageModel } from '../../../common/model/message.model';
 export class AuthService {
 
     // tslint:disable-next-line:variable-name
-    private _user: AuthenticatedUserModel = null;
+    //private _user: AuthenticatedUserModel = null;
     private preLoginuser: AuthenticatedUserModel = null;
 
     public userEvents = new BehaviorSubject<AuthenticatedUserModel>(undefined);
@@ -89,7 +90,8 @@ export class AuthService {
     getCurrentUser(): AuthenticatedUserModel 
     {
       let user = this.getUserFromStore();
-      if (!user && localStorage.getItem('user') ) {
+      if ((user===null || user===undefined) && localStorage.getItem('user') ) {
+        console.warn('getting user from local storage');
         const u: AuthUserModel = JSON.parse(localStorage.getItem('user'));
         user = u as AuthenticatedUserModel;
         const tokens = new TokensModel();
@@ -104,7 +106,14 @@ export class AuthService {
     {
       const url=`${environment.apiUrl}`;  
       const apiUrl = `${url}/auth/login/`;
-      return this.httpClient.post<AuthenticatedUserModel>(apiUrl, { username, password });
+      return this.httpClient.post<AuthenticatedUserModel>(apiUrl, { username, password })
+        .pipe(
+          map((data: AuthenticatedUserModel) => {
+            const newUser: AuthenticatedUserModel=new AuthenticatedUserModel();
+            Object.assign(newUser, data);
+            return newUser;
+          })
+      );
     }
 
     logout() 
@@ -119,11 +128,21 @@ export class AuthService {
       return this.httpClient.post<AuthenticatedUserModel>(apiUrl, { username, password, jeton });
     }
 
-    postProcessLogin(user: AuthenticatedUserModel) {
-      this._user=user;
-      if (user) {
-        this.store.dispatch( new LoginAction({user}) );
+    postProcessLogin(pUser: AuthenticatedUserModel) {
+      
+      let user: AuthenticatedUserModel=null;
+
+      if (pUser!==null && pUser!==undefined) 
+      {
+        user=new AuthenticatedUserModel();
+        Object.assign(user, pUser);
+        this.store.dispatch( new LoginAction( {user}) );
       }
+      else
+      {
+        this.store.dispatch( new LogoutAction());
+      }
+
       this.userEvents.next(user);
 
       if (user !== null) {
@@ -139,7 +158,7 @@ export class AuthService {
         //this.store.dispatch( new CalendarInitAction());
         //this.languageService.determineDefaultLanguage();
       }
-      
+     
     }
 
     preProcessLogin(user: AuthenticatedUserModel) 
@@ -165,7 +184,7 @@ export class AuthService {
     }
 
     getUserFromStore(): AuthenticatedUserModel {
-      let user: AuthenticatedUserModel = null;
+      let user: AuthenticatedUserModel;
       this.store.pipe(select(selectAuthenticatedUser), take(1)).subscribe( res => user = res);
       return user;
     }
@@ -185,22 +204,31 @@ export class AuthService {
 
     isUserClubAdmin(): boolean
     {
-      if(this._user===null) return false;
-      const role=this._user.roles.find( r => r.authDomain.domain==='club' && r.role==='admin');
+      // tslint:disable-next-line:variable-name
+      const _user=this.getUserFromStore();
+      if(_user===null || _user===undefined ) return false;
+      if(_user.roles===null || _user.roles===undefined) return false;
+      const role=_user.roles.find( r => r.authDomain.domain==='club' && r.role==='admin');
       return role !==null && role !== undefined;
     }
 
     isUserStageAdmin(): boolean
     {
-      if(this._user===null) return false;
-      const role=this._user.roles.find( r => r.authDomain.domain==='stage' && r.role==='admin');
+      // tslint:disable-next-line:variable-name
+      const _user=this.getUserFromStore();
+      if(! _user ) return false;
+      if(_user.roles===null || _user.roles===undefined) return false;
+      const role=_user.roles.find( r => r.authDomain.domain==='stage' && r.role==='admin');
       return role !==null && role !== undefined;
     }
 
     isUserEntrainementAdmin(): boolean
     {
-      if(this._user===null) return false;
-      const role=this._user.roles.find( r => r.authDomain.domain==='entrainement' && r.role==='admin');
+      // tslint:disable-next-line:variable-name
+      const _user=this.getUserFromStore();
+      if(! _user ) return false;
+      if(_user.roles===null || _user.roles===undefined) return false;
+      const role=_user.roles.find( r => r.authDomain.domain==='entrainement' && r.role==='admin');
       return role !==null && role !== undefined;
     }
 

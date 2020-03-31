@@ -1,0 +1,25 @@
+<p>pdf-viewer works!</p>
+
+<!-- <ngx-doc-viewer [url]="pdfDocument" viewer="mammoth" style="width:100%;height:50vh;"></ngx-doc-viewer> -->
+
+<button (click)="onSwitchWithDetails()">Switch details</button>
+<br>
+<hr>
+<br>
+
+<div *ngIf=" ! withDetails">
+      <pdf-viewer [src]="pdfDocument" 
+                    [render-text]="true"
+                    style="display: block;"
+                    [show-all]="true"
+      ></pdf-viewer>
+</div>
+
+  <div *ngIf="withDetails">
+        <ngx-extended-pdf-viewer [src]="pdfDocument" 
+              useBrowserLocale="true" 
+              height="600px"
+              width="800px"
+              [showOpenFileButton]="false"
+              ></ngx-extended-pdf-viewer>
+  </div>

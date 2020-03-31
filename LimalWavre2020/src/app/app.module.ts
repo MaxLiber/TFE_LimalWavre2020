@@ -40,17 +40,19 @@ import { PrimengModule } from './modules.vendors/primeng/primeng.module';
 import { MdBootstrapProModule } from './modules.vendors/mdbootstrap/md-bootstrap-pro.module';
 import { MessageService } from './common/message/message.service';
 
-import { MDBBootstrapModulesPro } from 'ng-uikit-pro-standard';
 import { MessageComponent } from './common/message/message.component';
 import { AppCommonModule } from './modules/common/app-common.module';
 import { AdminModule } from './modules/admin/admin.module';
 import { ContactModule } from './modules/contact/contact.module';
-import { SponsorsModule } from './modules/sponsors/sponsors.module';
-import { PrixModule } from './modules/prix/prix.module';
 import { LocalModule } from './modules/local/local.module';
+import { PrixModule } from './modules/prix/prix.module';
+import { SponsorsModule } from './modules/sponsors/sponsors.module';
 // import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
 //import { MDBSpinningPreloader } from 'ng-uikit-pro-standard';
 //import { ButtonsModule, WavesModule, CollapseModule } from 'ng-uikit-pro-standard'
+
+// import { PdfViewerModule } from 'ng2-pdf-viewer';
+// import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 
 @NgModule({
   declarations: [
@@ -97,9 +99,9 @@ import { LocalModule } from './modules/local/local.module';
     AppCommonModule,
     AdminModule,
     ContactModule,
-    SponsorsModule,
-    PrixModule,
     LocalModule,
+    PrixModule,
+    SponsorsModule,
     // Import the app routing module after the other app modules, so that the routes are merged
     AppRoutingModule, 
   ],

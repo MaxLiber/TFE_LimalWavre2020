@@ -1,6 +1,8 @@
 import { AuthUserGroupModel } from './auth-user-group.model';
+import { StringUtils } from '../../common/utils/string-utils';
 
 export class AuthUserModel {
+
     id: number;
     username: string;
     nom: string;
@@ -11,6 +13,16 @@ export class AuthUserModel {
     changePasswordJeton: string;
     enabled: boolean;
     authUserGroup: AuthUserGroupModel;
+    
+    getFullName(): string
+    {
+        return StringUtils.titleCase( this.prenom + ' ' + this.nom );
+    } 
+
+    getId(): number
+    {
+        return this.id;
+    }
 }
 
 export class AuthDomainModel

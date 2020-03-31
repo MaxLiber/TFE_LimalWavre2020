@@ -1,0 +1,30 @@
+
+<div *ngIf="context==='Admin'">
+
+    <button (click)="onCreateNews()">Créer une nouvelle news</button>
+    <button (click)="onTestPdfViewer()">Test pdf viewer</button>
+    
+    <div *ngIf="viewPdf">
+        <app-pdf-viewer></app-pdf-viewer>
+    </div>
+    
+    <hr>
+    
+    <h3>Les news</h3>
+</div>
+
+
+<div *ngIf="hasNews()">
+    <div *ngFor="let news of newsList">
+        <app-news [news]="news" [context]="context" (newsEvent)="handleNewsEvent($event)"></app-news>
+        <hr class="my-5">
+    </div>
+</div>
+
+<div *ngIf="! hasNews()">
+    <h6>Pas de nouvelle pour l'instant...</h6>
+</div>
+
+<br>
+<br>
+<br>

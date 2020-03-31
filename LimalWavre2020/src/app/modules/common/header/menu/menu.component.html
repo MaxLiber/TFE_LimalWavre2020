@@ -2,7 +2,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark red">
 
   <!-- Navbar brand -->
-  
+ 
   <a class="navbar-brand" href="#">CTT Limal-Wavre</a>
 
   <!-- Collapse button -->
@@ -17,17 +17,25 @@
 
     <!-- Links -->
     <ul class="navbar-nav mr-auto">
-      <li class="active">
+      <li class="active" *ngIf=" ! getAuthService().isUserClubAdmin()">
         <a class="nav-link" routerLinkActive="active" routerLink="/"> <i class="fa fa-home" aria-hidden="true"></i> Accueil<span class="sr-only">(current)</span></a>
       </li>
+      <li class="nav-item dropdown" *ngIf="getAuthService().isUserClubAdmin()">
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" 
+        aria-haspopup="true" aria-expanded="false"><i class="fa fa-users" aria-hidden="true"></i> Accueil</a>
+        <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+          <li><a class="dropdown-item"  routerLink="/">Accueil</a></li>
+          <li><a class="dropdown-item"  routerLink="news/liste/admin">Gérer les news</a></li>
+        </div>
+      </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" 
         aria-haspopup="true" aria-expanded="false"><i class="fa fa-users" aria-hidden="true"></i> Club</a>
         <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
           <li><a class="dropdown-item" routerLinkActive="active" routerLink="competition/liste">Les membres</a></li>
           <li><a class="dropdown-item" routerLinkActive="active" routerLink="competition/liste">Devenir membre</a></li>
           <div class="divider dropdown-divider"></div>
-          <li><a class="dropdown-item" routerLinkActive="active" routerLink="local/test">Local</a></li>
+          <li><a class="dropdown-item" routerLinkActive="active" routerLink="local/local">Local</a></li>
           <li><a class="dropdown-item" routerLinkActive="active" routerLink="tournoi/new">Comité et organisation</a></li>
           <li><a class="dropdown-item" routerLinkActive="active" routerLink="criterium/new">Statuts</a></li>
           <li><a class="dropdown-item" routerLinkActive="active" routerLink="coupe/new">Réglement Ordre Intérieur</a></li>
@@ -62,7 +70,7 @@
 
       <li><a class="nav-link" routerLinkActive="active" routerLink="/"><i class="fa fa-file-text" aria-hidden="true"></i> Documents<span class="sr-only">(current)</span></a></li>
                     
-      <li><a class="nav-link" routerLinkActive="active" routerLink="sponsors/test"><i class="fa fa-handshake-o" aria-hidden="true"></i> Sponsors<span class="sr-only">(current)</span></a></li>
+      <li><a class="nav-link" routerLinkActive="active" routerLink="sponsors/liste"><i class="fa fa-handshake-o" aria-hidden="true"></i> Sponsors<span class="sr-only">(current)</span></a></li>
 
       <li><a class="nav-link" routerLinkActive="active" routerLink="contact/form"><i class="fa fa-address-book-o" aria-hidden="true"></i> Contact<span class="sr-only">(current)</span></a></li>
     
@@ -95,7 +103,7 @@
     <ul class="navbar-nav nav-flex-icons">
                 
       <li class="nav-item waves-light" mdbWavesEffect *ngIf=" user " (click)="onMyProfile($event)">
-        <a class="nav-link" title="{{user.username}}">&nbsp; <i class="fa fa-user prefix"></i> &nbsp;</a>
+        <a class="nav-link" title="{{user.getFullName()}}">&nbsp; <i class="fa fa-user prefix"></i> &nbsp;</a>
       </li>
       
       <li class="nav-item waves-light" mdbWavesEffect *ngIf=" ! user " routerLink="login">

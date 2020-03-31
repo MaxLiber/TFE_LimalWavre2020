@@ -8,7 +8,7 @@ import { LocalComponent } from './local/local.component';
 export const CONTACT_ROUTES: Routes =
 [
     { path: 'local',  children: [
-        { path: 'test', component: LocalComponent },
+        { path: 'local', component: LocalComponent },
         ] }
 ];
 

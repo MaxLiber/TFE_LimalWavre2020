@@ -8,6 +8,7 @@ import { LocalRoutingModule } from './local-routing.module';
 import { MdBootstrapProModule } from '../../modules.vendors/mdbootstrap/md-bootstrap-pro.module';
 
 
+
 @NgModule({
   declarations: [LocalComponent],
   imports: [
@@ -17,11 +18,13 @@ import { MdBootstrapProModule } from '../../modules.vendors/mdbootstrap/md-boots
     ReactiveFormsModule,
     FlexLayoutModule,
     LocalRoutingModule,
-    
+    MdBootstrapProModule,
+  
   ],
   exports: [
     LocalRoutingModule,
     MaterialModule,
+    
   ]
 })
 export class LocalModule { }

@@ -8,7 +8,7 @@ import { SponsorsComponent } from './sponsors/sponsors.component';
 export const CONTACT_ROUTES: Routes =
 [
     { path: 'sponsors',  children: [
-        { path: 'test', component: SponsorsComponent },
+        { path: 'liste', component: SponsorsComponent },
         ] }
 ];
 
