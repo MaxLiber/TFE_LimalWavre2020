@@ -1,0 +1,57 @@
+
+<div *ngIf="users">
+    <!-- {{ users | json }} -->
+
+    <mdb-card>
+        <!--Card image-->
+        <!-- <mdb-card-img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(97).jpg" alt="Card image cap"></mdb-card-img> -->
+        <!--Card content-->
+        <mdb-card-body>
+      
+          <!--Title-->
+          <mdb-card-title>
+            <h1>Les membres</h1>
+          </mdb-card-title>
+          <img alt="My image name" [src]="'assets/img/membres2.jpg'" class="img-fluid title-image">
+      
+          <!--Text-->
+          <mdb-card-text> Some quick example text to build on the card title and make up the bulk of the card's
+            content.
+          </mdb-card-text>
+      
+          <table mdbTable small="true">
+            <thead>
+              <tr>
+                <!-- <th *ngFor="let user of headElements" scope="col">{{head}} </th> -->
+                <th>N°</th>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Licence</th>
+                <th>Utilisateur</th>
+                <th>Dernière connexion</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr mdbTableCol *ngFor="let user of users; let ix=index">
+                <th scope="row">{{ix+1}}</th>
+                <th>{{user.id}}</th>
+                <td>{{user.nom}}</td>
+                <td>{{user.prenom}}</td>
+                <td>{{user.licence}}</td>
+                <td>{{user.username}}</td>
+                <td>{{ user.lastLoginAt | date:'dd/MM/yyyy HH:mm' }}</td>
+              </tr>
+            </tbody>
+          </table>
+
+        </mdb-card-body>
+      </mdb-card>
+
+    <mat-card>
+        <mat-card-title>Les membres</mat-card-title>
+        <mat-card-content>
+            
+        </mat-card-content>
+    </mat-card>
+</div>
