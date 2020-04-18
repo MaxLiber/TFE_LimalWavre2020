@@ -1,0 +1,44 @@
+
+<h2>Gestion des interclubs via AFTT</h2>
+
+
+<mdb-tabset #staticTabs [buttonClass]="'md-tabs'" [contentClass]="'card'" *ngIf="afttSyncInfo">
+
+  <mdb-tab heading="Equipes">
+    <app-admin-equipes *ngIf="afttTeams && afttDivisionCategories" 
+      [afttDivisionCategories]="afttDivisionCategories"
+      [afttTeams]="afttTeams"></app-admin-equipes>
+  </mdb-tab>
+
+  <mdb-tab heading="Divisions">
+    <app-admin-divisions *ngIf="afttDivisions && afttDivisionCategories" 
+      [afttDivisionCategories]="afttDivisionCategories"
+      [afttDivisions]="afttDivisions"></app-admin-divisions>
+  </mdb-tab>
+
+  <mdb-tab heading="Listes des forces">
+    <app-admin-listesdesforces *ngIf="afttMembers && afttDivisionCategories"
+      [afttDivisionCategories]="afttDivisionCategories"
+      [afttMembers]="afttMembers"></app-admin-listesdesforces>
+  </mdb-tab>
+
+  <mdb-tab heading="Les semaines">
+    <app-admin-semaines
+      [afttSyncInfo]="afttSyncInfo"
+      [afttDivisionCategories]="afttDivisionCategories"
+      [weeks]="afttWeekByCategory"></app-admin-semaines>
+  </mdb-tab>
+
+  <mdb-tab heading="Les calendriers">
+    <app-admin-calendriers *ngIf="afttDivisionCategories"
+      [afttSyncInfo]="afttSyncInfo"
+      [afttTeams]="afttTeams"
+      [afttDivisionCategories]="afttDivisionCategories"
+      [afttWeekByCategory]="afttWeekByCategory"></app-admin-calendriers>
+  </mdb-tab>
+
+  <mdb-tab heading="Synchronisations AFTT">
+    <app-admin-synchronisation [afttSyncInfo]="afttSyncInfo"></app-admin-synchronisation>
+  </mdb-tab>
+
+</mdb-tabset>

@@ -1,0 +1,18 @@
+<mdb-tabset #staticTabs [buttonClass]="'md-tabs'" [contentClass]="'card'">
+    <!--Panel 1-->
+    <mdb-tab heading="Domaines">
+        <app-admin-domaines [domains]="domains"></app-admin-domaines>
+    </mdb-tab>
+    <!--Panel 2-->
+    <mdb-tab heading="Groupes">
+        <app-admin-groupes [groups]="groups"></app-admin-groupes>
+    </mdb-tab>
+    <mdb-tab heading="Roles">
+      <app-admin-role></app-admin-role>
+    </mdb-tab>
+    <!--Panel 3-->
+    <mdb-tab heading="Groupes-roles">
+      <app-admin-group-role></app-admin-group-role>
+    </mdb-tab>
+ 
+  </mdb-tabset>

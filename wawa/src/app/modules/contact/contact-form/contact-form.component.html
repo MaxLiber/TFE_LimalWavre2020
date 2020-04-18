@@ -1,0 +1,86 @@
+
+<!-- <h4>Envoyer un message ou poser une question</h4> -->
+<!-- <div *ngIf="loading">
+	<mat-progress-bar mode="indeterminate" color="primary"></mat-progress-bar>
+</div> -->
+
+<div *ngIf="done">
+	<div fxLayout="row" fxLayoutGap="15px">
+		<div fxFlex="30">
+			<div class="card">
+			<h5 class="card-header primary-color white-text">Envoyer un message ou poser une question</h5>
+				<div class="card-body">
+					Votre message a bien &eacute;t&eacute; envoy&eacute;.<br /> Nous le
+					traiterons dans les plus brefs d&eacute;lais.<br /> Bien &agrave; vous.<br />
+                    Le comit&eacute;.<br /> <br /> <a class="nav-link"	[routerLink]="['/']">Retour page d'accueil</a>
+                    <br>
+                    <a class="nav-link"	(click)="onReturnToForm()">Revenir au formulaire</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<div *ngIf=" ! done">
+<div fxLayout="row" fxLayoutGap="15px">
+	<div fxFlex="20"></div>
+	
+	<div fxFlex="60">
+        <div fxLayout="column" class="d-flex justify-content-center align-middle">
+            <!-- contact form -->
+            <section class="form-elegant">
+                <div class="card">
+                    <h5 class="card-header primary-color white-text">Envoyer un message ou poser une question</h5>
+                        <div class="card-body">
+                            <form [formGroup]="contactForm" (ngSubmit)="onSendMessage()">
+                            
+                                <div class="md-form">
+                                    <i class="fa fa-user prefix grey-text"></i>
+                                    <input type="text" id="contactFormName" formControlName="contactFormName" 
+                                            class="form-control" mdbInput>
+                                    <label for="contactFormName">Votre nom et prénom</label>
+                                </div>
+                            
+                                <div class="md-form">
+                                    <i class="fa fa-envelope prefix grey-text"></i>
+                                    <input type="email" id="contactFormEmail" formControlName="contactFormEmail" 
+                                            class="form-control" mdbInput>
+                                    <label for="contactFormEmail">Votre adresse email</label>
+                                </div>
+                            
+                                <div class="md-form">
+                                    <i class="fa fa-tag prefix grey-text"></i>
+                                    <input type="text" id="contactFormSubject" formControlName="contactFormSubject" 
+                                            class="form-control" mdbInput>
+                                    <label for="contactFormSubject">Le sujet de votre message</label>
+                                </div>
+                            
+                                <div class="md-form">
+                                    <i class="fa fa-pencil prefix grey-text"></i>
+                                    <textarea type="text" id="contactFormMessage" formControlName="contactFormMessage" 
+                                            class="md-textarea" style="height: 70px"
+                                            mdbInput></textarea>
+                                    <label for="contactFormMessage">Votre message</label>
+                                </div>
+                            
+                                <div class="text-center">
+                                    <button  type="submit" class="btn btn-unique waves-light" mdbWavesEffect 
+                                        [disabled]="contactForm.invalid">Envoyer
+                                        <i class="fa fa-paper-plane-o ml-1"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        <!-- contact form -->
+                </div>
+            </section>
+        </div>
+	</div>
+	
+	<div fxFlex="20"></div>
+	
+</div>
+
+</div>

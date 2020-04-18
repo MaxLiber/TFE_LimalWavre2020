@@ -1,0 +1,194 @@
+
+<div id="screen-large" fxLayout="row" fxLayoutAlign="center center" >
+
+	<div fxFlex="33">
+	<table>
+	</table>
+	</div>
+
+	<div fxFlex="33">
+		<br />
+		<div class="card">
+		    <div class="card-header">
+		        <strong>Login</strong>
+		    </div>
+		    <div class="card-body">
+		    	<h4 class="card-title">Se connecter</h4>
+		        
+						<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+									  
+									<i class="fa fa-user prefix grey-text"></i>
+									&nbsp; &nbsp;
+									<mat-form-field>
+										<input
+										  type="text"
+										  matInput
+										  placeholder="Nom d'utilisateur "
+										  formControlName="username">
+										<!-- <mat-hint>{{'login.label.Your username'|translate}}</mat-hint> -->
+										<mat-error>Utilisateur incorrect</mat-error>
+									</mat-form-field>
+									  
+									<br>
+
+									
+									  
+									  <i class="fa fa-lock prefix grey-text"></i>
+									  &nbsp; &nbsp;
+									  <mat-form-field>
+											<input
+											  type="password"
+											  matInput
+											  placeholder="Mot de passe"
+											  formControlName="password">
+											<!-- <mat-hint>{{ "login.label.Your password"|translate}}</mat-hint> -->
+											<mat-error>Mot de passe incorrect</mat-error>
+										</mat-form-field>
+								      
+								          	<table>
+									    	<tr>
+									    	<td align="center" style="color: red; font-weight: bold;">
+												
+												
+												<span *ngIf="error === 'InvalidUserOrPassword' ">
+													Nom d'utilisateur ou mot de passe incorrect
+												</span>
+									    	</td>
+									    	</tr>
+									    	</table>
+								      <div class="text-center py-4 mt-3">
+										<button class="btn btn-sm btn-dark-green waves-light" 
+											type="submit" [disabled]="loginForm.invalid" mdbWavesEffect>
+													Se connecter</button>
+										<button mdbBtn type="button" gradient="purple" size="sm" mdbWavesEffect (click)="onCancelLogin()">Cancel</button>
+
+								      </div>
+								      
+								      	<hr />
+						
+	      		        			<div class="text-left">
+	      		        			<table>
+	      		        			<tr>
+	      		        			<td>
+	      		        			<small>Mot de passe oublié&nbsp;?</small><br />
+								        <button class="btn btn-sm btn-unique waves-light"
+												type="button" (click)="onResendPassword()"
+												mdbWavesEffect [disabled]="isUsernameFieldEmpty()">
+														Renvoyer mon mot de passe</button>
+
+										
+	      		        			</td>
+	      		        			
+	      		        	
+	      		        			
+	      		        			</tr>
+	      		        			</table>
+	      		        				
+								      	
+								      </div>
+						</form>
+						
+	
+		    </div>
+		    
+		
+		</div>
+
+	</div>
+
+	<div fxFlex="33">
+	</div>
+
+</div>
+
+<!-- SMALL SCREEN-->
+<div id="screen-small" fxLayout="row" fxLayoutAlign="center center" >
+	<div>
+		<div class="card">
+		    <div class="card-header">
+		        <strong>Login</strong>
+		    </div>
+		    <div class="card-body">
+		    	<h4 class="card-title">Se connecter</h4>
+		        
+						<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+									  
+									<i class="fa fa-user prefix grey-text"></i>
+									&nbsp; 
+									<mat-form-field>
+										<input
+										  type="text"
+										  matInput
+										  placeholder="Nom d'utilisateur "
+										  formControlName="username">
+										<!-- <mat-hint>{{'login.label.Your username'|translate}}</mat-hint> -->
+										<mat-error>Utilisateur incorrect</mat-error>
+									</mat-form-field>
+									
+									<span>&nbsp;</span>
+									  <i class="fa fa-lock prefix grey-text"></i>
+									  &nbsp; 
+									  <mat-form-field>
+											<input
+											  type="password"
+											  matInput
+											  placeholder="Mot de passe"
+											  formControlName="password">
+											<!-- <mat-hint>{{ "login.label.Your password"|translate}}</mat-hint> -->
+											<mat-error>Mot de passe incorrect</mat-error>
+										</mat-form-field>
+								      
+								          	<table>
+									    	<tr>
+									    	<td align="center" style="color: red; font-weight: bold;">
+												
+												
+												<span *ngIf="error === 'InvalidUserOrPassword' ">
+													Nom d'utilisateur ou mot de passe incorrect
+												</span>
+									    	</td>
+									    	</tr>
+									    	</table>
+								      <div class="text-left">
+										<button class="btn btn-sm btn-dark-green waves-light" 
+											type="submit" [disabled]="loginForm.invalid" mdbWavesEffect>
+													Se connecter</button>
+										<button mdbBtn type="button" gradient="purple" size="sm" mdbWavesEffect (click)="onCancelLogin()">Cancel</button>
+
+								      </div>
+								      
+								      	<hr />
+						
+	      		        			<div class="text-left">
+	      		        			<table>
+	      		        			<tr>
+	      		        			<td>
+									  <small>Mot de passe oublié&nbsp;?</small>
+									  	<span class="span-break"><br></span>
+										<span class="span-space">&nbsp; &nbsp;</span>
+								        <button class="btn btn-sm btn-unique waves-light" 
+												type="button" (click)="onResendPassword()"
+												mdbWavesEffect [disabled]="isUsernameFieldEmpty()">
+														Renvoyer mon mot de passe</button>
+
+										
+	      		        			</td>
+	      		        			
+	      		        	
+	      		        			
+	      		        			</tr>
+	      		        			</table>
+	      		        				
+								      	
+								      </div>
+						</form>
+						
+	
+		    </div>
+		    
+		
+		</div>
+
+	</div>
+
+</div>

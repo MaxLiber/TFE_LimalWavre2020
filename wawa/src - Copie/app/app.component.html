@@ -1,0 +1,106 @@
+
+<div *ngIf="ckeckingBrowser">
+	Checking your internet navigator...
+</div>
+
+<div *ngIf="!ckeckingBrowser">
+
+	<div fxLayout="column" *ngIf="browserAllowed" >
+	
+
+            <div fxFlex="1">
+                <app-header></app-header>
+                <p-toast [style]="{marginTop: '60px'}"></p-toast>
+                <!-- <p-toast></p-toast> -->
+			</div>
+			
+			<!-- <div fxFlex="1"></div> -->
+            
+			<div fxFlex="20" class="site-content">
+				<div fxLayout="row">
+					<div fxFlex="2%"></div>
+					<div fxFlex="96%">
+						<router-outlet></router-outlet>
+					</div>
+					<div fxFlex="2%"></div>
+				</div>
+			</div>
+
+            
+            
+            <div fxFlex="1">
+                <app-footer></app-footer>
+            </div>
+            
+		
+	</div>
+
+	<div fxLayout="column" *ngIf="! browserAllowed" >
+		INTERNET EXPLORER / MS-Edge<br>
+		<br>
+		Votre navigateur internet n'est pas supporté.<br>
+		Uw internetbrowser wordt niet ondersteund.<br>
+		Your internet navigator is not supported.<br>
+		<br>
+
+		<table class="table table-sm">
+			<thead>
+				<tr>
+					<th>Lang</th>
+					<th>Chrome</th>
+					<th>Opera</th>
+					<th>Firefox</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>FR</td>
+					<td><a href="https://support.google.com/chrome/answer/95346?co=GENIE.Platform%3DDesktop&hl=fr" target="_blank">Chrome NL</a></td>
+					<td><a href="https://www.opera.com/fr" target="_blank">Opera FR</a></td>
+					<td><a href="https://www.mozilla.org/fr/firefox/new/" target="_blank">Firefox FR</a></td>
+				</tr>
+				<tr>
+					<td>NL</td>
+					<td><a href="https://support.google.com/chrome/answer/95346?co=GENIE.Platform%3DDesktop&hl=nl" target="_blank">Chrome NL</a></td>
+					<td><a href="https://www.opera.com/nl" target="_blank">Opera NL</a></td>
+					<td><a href="https://www.mozilla.org/nl/firefox/new/" target="_blank">Firefox NL</a></td>
+				</tr>
+				<tr>
+					<td>EN</td>
+					<td><a href="https://support.google.com/chrome/answer/95346?co=GENIE.Platform%3DDesktop&hl=en" target="_blank">Chrome NL</a></td>
+					<td><a href="https://www.opera.com/en" target="_blank">Opera EN</a></td>
+					<td><a href="https://www.mozilla.org/en/firefox/new/" target="_blank">Firefox EN</a></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		<br>
+		Note:<br>
+		<table class="table table-sm">
+			<tbody>
+				<tr>
+					<td>FR:</td>
+					<td>Vu les problèmes techniques posés par Internet Explorer/Edge, 
+						nous avons décidé momentanément de ne pas autoriser son utilisation.<br>
+						Veuillez nous excuser pour ces désagréments.
+					</td>
+				</tr>
+				<tr>
+                    <td>NL:</td>
+                    <td>Gezien de technische problemen met Internet Explorer/Edge
+                        hebben we tijdelijk besloten het gebruik ervan niet toe te staan.<br>
+                        Onze excuses voor dit ongemak.
+                    </td>
+                </tr>
+                <tr>
+                    <td>EN:</td>
+                    <td>
+                        Due to technical issues using Internet Explorer/Edge, we decided to temporarly not authorize its use.<br>
+                        We apologize.
+                    </td>
+                </tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+

@@ -1,0 +1,107 @@
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+
+// REDUX - ngRx
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { StoreRouterConnectingModule, RouterState } from '@ngrx/router-store';
+import { APP_META_REDUCERS, APP_REDUCERS } from './state/reducers/app.reducers';
+//
+import { environment } from '../environments/environment';
+import { MaterialModule } from './modules.vendors/google.angular.material/material.module';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { AuthModule } from './modules/auth/auth.module';
+import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
+//import { CustomRouteSerializer } from './state/custom-route-serializer';
+
+// JWT
+import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
+export function jwtOptionsFactory() {
+  return {
+    tokenGetter: () => {
+      return localStorage.getItem('access_token');
+    },
+    // whitelistedDomains: ['localhost:3000'], // list of domains to which an authenticated request is sent
+  };
+}
+
+// technical module
+import { DeviceDetectorModule } from 'ngx-device-detector';
+import { AppDefaultComponent } from './app-default/app-default.component';
+import { PrimengModule } from './modules.vendors/primeng/primeng.module';
+import { MdBootstrapProModule } from './modules.vendors/mdbootstrap/md-bootstrap-pro.module';
+import { MessageService } from './common/message/message.service';
+
+import { MDBBootstrapModulesPro } from 'ng-uikit-pro-standard';
+import { MessageComponent } from './common/message/message.component';
+import { AppCommonModule } from './modules/common/app-common.module';
+import { AdminModule } from './modules/admin/admin.module';
+//import { MDBSpinningPreloader } from 'ng-uikit-pro-standard';
+//import { ButtonsModule, WavesModule, CollapseModule } from 'ng-uikit-pro-standard'
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    AppDefaultComponent,
+    MessageComponent,
+  ],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    
+
+    //
+    
+    FlexLayoutModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    HttpClientModule,
+    MdBootstrapProModule,
+    PrimengModule,
+    MaterialModule,
+    DeviceDetectorModule.forRoot(),
+    JwtModule.forRoot({
+      jwtOptionsProvider: {
+        provide: JWT_OPTIONS,
+        useFactory: jwtOptionsFactory,
+      },
+    }),
+
+    // REDUX
+    // Redux
+    StoreModule.forRoot(APP_REDUCERS, { metaReducers:  APP_META_REDUCERS }),
+    EffectsModule.forRoot([]),
+    StoreDevtoolsModule.instrument( {maxAge: 25, logOnly: environment.production}), // dev tools ne seront actifs que si on n'est PAS en production
+    StoreRouterConnectingModule.forRoot({
+      stateKey: 'router',
+      //serializer: CustomRouteSerializer,
+      routerState: RouterState.Minimal
+    }),
+
+    // Application Modules
+    AuthModule.forRoot(),
+    AppCommonModule,
+    AdminModule,
+
+    // Import the app routing module after the other app modules, so that the routes are merged
+    AppRoutingModule, 
+  ],
+  providers: [
+    MessageService,
+  ],
+  bootstrap: [AppComponent],
+
+  schemas: [ NO_ERRORS_SCHEMA ]
+  
+})
+export class AppModule { }

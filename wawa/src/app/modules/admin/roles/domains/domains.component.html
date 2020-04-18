@@ -1,0 +1,53 @@
+
+<h5>Les domaines:</h5>
+
+<div>
+    <h6>Créer un nouveau domaine:</h6>
+    <form [formGroup]="domainForm" (ngSubmit)="onCreateDomain()" class="border border-black">
+        <div class="domain-form">
+            <div class="md-form">
+                <i class="fa fa-user prefix grey-text"></i>
+                <input type="text" id="nom" formControlName="nom" class="form-control" mdbInput width="300px">
+                <label for="nom">Domaine</label>
+            </div>
+            
+            <div class="md-form" fxFlex="50%">
+                <i class="fa fa-envelope prefix grey-text"></i>
+                <input type="text" id="commentaire" formControlName="commentaire" class="form-control" mdbInput>
+                <label for="commentaire">Commentaire</label>
+            </div>
+
+            <div class="md-form" >
+                <button  type="submit" class="btn btn-unique button-small waves-light" mdbWavesEffect [disabled]="domainForm.invalid">
+                  <i class="fa fa-paper-plane-o ml-1"></i> &nbsp; Créer le domaine
+                </button>
+              </div>
+        </div>
+    </form>
+</div>
+<br>
+<h6>Liste des domaines:</h6>
+<div *ngIf="domains">
+    
+    <br>
+    <table mdbTable small="true" hover="true">
+        <thead>
+          <tr>
+            <th>N°</th>
+            <th>Domain_ID</th>
+            <th>Domaine</th>
+            <th>Commentaire</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr mdbTableCol *ngFor="let domain of domains; let ix=index">
+            <th scope="row">{{ix+1}}</th>
+            <th>{{domain.id}}</th>
+            <td>{{domain.domain}}</td>
+            <td>{{domain.commentaire}}</td>
+            <td>... todo ...</td>
+          </tr>
+        </tbody>
+      </table>
+</div>

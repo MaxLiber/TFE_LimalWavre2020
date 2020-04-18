@@ -1,0 +1,21 @@
+.site-footer { 
+    font-size: small;
+    position: fixed; 
+    bottom: 0; 
+    height:20px; 
+    width: 100%;
+    //background: teal ;
+    background-color: crimson;
+    display: flex;
+    /* display: inline-block; */
+   	position: fixed !important;
+	position: absolute;
+	z-index: 100;
+}
+
+@media screen and (max-width: 400px)
+  {
+    .site-footer {
+        visibility: hidden;
+    }
+  }
