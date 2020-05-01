@@ -1,0 +1,109 @@
+
+    <div class="row">
+                
+                      <div class="col-sm-4">
+                            <mdb-card class="small">
+                                
+                                <mdb-card-body>
+                                    <mdb-card-title>
+                                        <h5>Sélections interclubs</h5>
+                                      </mdb-card-title>
+                                    
+
+                                    <div>
+                                        <mat-form-field>
+                                            <mat-label>Categorie</mat-label>
+                                            <mat-select matNativeControl [(ngModel)]="selectedCategory" name="category" 
+                                                (selectionChange)="onChangeCategory($event)">
+                                            <mat-option value="" selected></mat-option>
+                                            <mat-option *ngFor="let i of interclubs" [value]="i">
+                                                Categorie {{i.synonyme}}
+                                            </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div>
+                                        <mat-form-field>
+                                            <mat-label>Semaine</mat-label>
+                                            <mat-select matNativeControl [(ngModel)]="selectedSemaine" name="semaine" 
+                                                (selectionChange)="onChangeSemaine($event)">
+                                            <mat-option value="" selected></mat-option>
+                                            <mat-option *ngFor="let w of semainesByInterclubsCategory" [value]="w">
+                                                Semaine {{w.weekName}} du {{w.startOfWeek | date:'dd/MM/yyyy'}} au {{w.endOfWeek | date:'dd/MM/yyyy' }}.
+                                            </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </mdb-card-body>
+                            </mdb-card>
+                        </div>
+    
+                        <div class="col-sm-8">
+                            <mdb-card class="small">
+                                
+                                <mdb-card-body>
+                                    <mdb-card-title>
+                                        <h5>Votre sélection</h5>
+                                      </mdb-card-title>
+                                      <p style="text-align: center;">Vous avez été sélectionné pour le match : <b>Limal Wavre C (BBW123) contre Alpa Schaerb. Woluwe D (BBW015)</b> </p>
+                                      <table mdbTable small="true" hover="true" >
+                                        <tr>
+                                            <th style="width: 5%" scope="col">N°</th>
+                                            <th style="width: 5%" scope="col">Indice</th>
+                                            <th style="width: 20%" scope="col">Joueur</th>
+                                            <th style="width: 5%" scope="col">Classement</th>
+                                            <th style="width: 5%" scope="col">Statut</th>
+                                            <th style="width: 10%" scope="col">Commentaire</th>
+                                            
+                                        </tr>
+                                         <tr>
+                                             <th scope="row">
+                                                <span *ngIf="currentUserSelection">{{ currentUserSelection.sel.position }}</span>
+                                            </th>            
+                                            <td>
+                                                <span *ngIf="currentUserSelection">{{ currentUserSelection.sel.ranking_index }}</span>
+                                                
+                                            </td>   
+                                            <td>
+                                                <span *ngIf="currentUserSelection">MAXIME LIBER</span>
+                                            </td>    
+                                            <td>
+                                                <span *ngIf="currentUserSelection">B6</span>
+                                            </td>          
+                                                
+                                            <td>
+                                                <span *ngIf="currentUserSelection">OK</span>
+                                            </td>
+                                            <td>
+                                                <span *ngIf="currentUserSelection">OK</span>
+                                            </td>
+                                            
+                                        </tr> 
+  
+                                    </table>
+                                    
+                                   <!--  <span *ngIf="currentUserSelection">{{ currentUserSelection.sel.interclubs_match_id }}</span> -->
+                                    <!--<span *ngIf="currentUserSelection">ALL: {{ currentUserSelection | json }}</span>
+                                    <br><br><br>
+                                     <span *ngIf="currentUserSelection">ALL: {{ currentUserSelection.ldf[0]}}</span> -->
+                                </mdb-card-body>
+                            </mdb-card>
+                        </div>
+                        
+    </div>
+
+
+  <div *ngIf="teamSelectionData">
+      <div *ngFor="let teamData of teamSelectionData">
+        <div *ngIf="teamData.selectionsLoaded">
+          <app-selection-information-by-team [teamData]="teamData"></app-selection-information-by-team>
+        </div>
+      </div>
+  </div>
+
+
+
+ 
+  
+  
