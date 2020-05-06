@@ -18,7 +18,24 @@ export class ListeDeForceComponent implements OnInit
 
   verifyErrors=new Array<{nom: string, prenom: string, licence: string }>();
 
-  
+  constructor(
+    private authService: AuthService,
+    private selectionService: SelectionService,
+  ) { }
+
+  ngOnInit(): void 
+  {
+    this.selectionService.getInterclubsLDFParticipants()
+      .subscribe(participants => this.ldfParticipants = participants);
+
+    // Chargement de la composition des listes de forces
+    this.selectionService.getInterclubsLDFByCategory()
+      .subscribe(
+        compositions => {
+          this.ldfByCategory = compositions;
+        }
+    );
+  }
 
   onVerifyParticipantToUserLink()
   {
