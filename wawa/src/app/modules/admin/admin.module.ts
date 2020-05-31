@@ -23,6 +23,8 @@ import { CalendriersByCategoryComponent } from './interclubs/calendriers-by-cate
 import { SemainesComponent } from './interclubs/semaines/semaines.component';
 import { SemainesByCategoryComponent } from './interclubs/semaines-by-category/semaines-by-category.component';
 import { MaterialModule } from '../../modules.vendors/google.angular.material/material.module';
+import { PrimengModule } from '../../modules.vendors/primeng/primeng.module';
+import { SupportedMatchTypesComponent } from './interclubs/supported-match-types/supported-match-types.component';
 
 
 
@@ -39,13 +41,15 @@ import { MaterialModule } from '../../modules.vendors/google.angular.material/ma
     DivisionsComponent, 
     ListesdesforcesByCategoryComponent, 
     ListesdesforcesComponent, 
-    DivisionsByCategoryComponent, SynchronisationComponent, CalendriersComponent, CalendriersByCategoryComponent, SemainesComponent, SemainesByCategoryComponent,
+    DivisionsByCategoryComponent, SynchronisationComponent, 
+    CalendriersComponent, CalendriersByCategoryComponent, SemainesComponent, SemainesByCategoryComponent, SupportedMatchTypesComponent, 
   ],
   imports: [
     CommonModule,
     AdminRoutingModule,
     MaterialModule,
     MdBootstrapProModule,
+    PrimengModule,
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,

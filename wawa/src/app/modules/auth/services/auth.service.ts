@@ -15,6 +15,8 @@ import { AuthUserModel } from '../model/auth-user.model';
 import { environment } from '../../../../environments/environment';
 import { MessageModel } from '../../../common/model/message.model';
 import { LogoutAction } from '../state/actions/auth-logout.action';
+import { AuthFonctionModel } from '../model/auth-fonction.model';
+import { AuthGroupModel } from '../model/auth-group.model';
 
 @Injectable({
   providedIn: 'root'
@@ -97,8 +99,13 @@ export class AuthService {
         const tokens = new TokensModel();
         Object.assign(tokens, this.getTokens());
         user.tokens = tokens;
+        const newUser: AuthenticatedUserModel = new AuthenticatedUserModel();
+        Object.assign(newUser, user);
+        user = newUser;
         this.store.dispatch( new LoginAction({user}) );
+        this.userEvents.next(user);
       }
+      
       return user;
     }
 
@@ -191,7 +198,7 @@ export class AuthService {
 
     resentPassword( username: string ): Observable<MessageModel>
     {
-        const apiUrl=`${environment.apiUrl}/auth/resendPassword.json`;
+        const apiUrl=`${environment.apiUrl}/auth/resendPassword`;
         const postData = new FormData();
         postData.append('username' , username );
         return this.httpClient.post<MessageModel>( apiUrl, postData );
@@ -232,9 +239,97 @@ export class AuthService {
       return role !==null && role !== undefined;
     }
 
-    getUserList(): Observable<Array<AuthUserModel>>
+    getUserList(readAll: boolean): Observable<Array<AuthUserModel>>
     {
-      const apiUrl=`${environment.apiUrl}/auth/liste`;
+      const apiUrl=`${environment.apiUrl}/auth/liste/?readAll=${readAll}`;
       return this.httpClient.get<Array<AuthUserModel>>( apiUrl );
+    }
+
+    createUser(userFormValue: any, assignedFonctions: Array<AuthFonctionModel>, assignedRoles: Array<AuthGroupModel>): Observable<AuthUserModel>
+    {
+      const apiUrl=`${environment.apiUrl}/auth/createUser`;
+      /*
+      const postData = new FormData();
+      postData.append('userFormValue' , userFormValue );
+      postData.append('assignedFonctions' , JSON.stringify(assignedFonctions) );
+      postData.append('assignedRoles' , JSON.stringify(assignedRoles) );
+      return this.httpClient.post<AuthUserModel>( apiUrl, postData );
+      */
+      return this.httpClient.post<AuthUserModel>(apiUrl, 
+          { 
+            userFormValue, 
+            assignedFonctions: JSON.stringify(assignedFonctions), 
+            assignedRoles:  JSON.stringify(assignedRoles)
+          });
+    }
+
+    getUserGroupsByUserId(userId: number): Observable<Array<AuthGroupModel>>
+    {
+      const apiUrl=`${environment.apiUrl}/auth/groups/${userId}`;
+      return this.httpClient.get<Array<AuthGroupModel>>( apiUrl );
+    }
+
+    updateUser(userFormValue: any, assignedFonctions: Array<AuthFonctionModel>, assignedRoles: Array<AuthGroupModel>): Observable<AuthUserModel>
+    {
+      const apiUrl=`${environment.apiUrl}/auth/updateUser`;
+
+      return this.httpClient.post<AuthUserModel>(apiUrl, 
+          { 
+            userFormValue, 
+            assignedFonctions: JSON.stringify(assignedFonctions), 
+            assignedRoles:  JSON.stringify(assignedRoles)
+          });
+    }
+
+    deleteUserLogically(user: AuthUserModel): Observable<MessageModel>
+    {
+      const apiUrl=`${environment.apiUrl}/auth/deleteUserLogically`;
+
+      return this.httpClient.post<MessageModel>(apiUrl, 
+          { 
+            userId: user.id, 
+          });
+    }
+
+    deleteUserPermanently(user: AuthUserModel): Observable<MessageModel>
+    {
+      const apiUrl=`${environment.apiUrl}/auth/deleteUserPermanently`;
+
+      return this.httpClient.post<MessageModel>(apiUrl, 
+          { 
+            userId: user.id, 
+          });
+    }
+
+    resetUserPassword(user: AuthUserModel): Observable<MessageModel>
+    {
+      const apiUrl=`${environment.apiUrl}/auth/resetUserPassword`;
+
+      return this.httpClient.post<MessageModel>(apiUrl, 
+          { 
+            userId: user.id, 
+          });
+    }
+
+    reactivateUser(user: AuthUserModel): Observable<MessageModel>
+    {
+      const apiUrl=`${environment.apiUrl}/auth/reactivateUser`;
+
+      return this.httpClient.post<MessageModel>(apiUrl, 
+          { 
+            userId: user.id, 
+          });
+    }
+
+    findUserForClubComite(): Observable<Array<AuthUserModel>>
+    {
+      const apiUrl=`${environment.apiUrl}/auth/comite`;
+      return this.httpClient.get<Array<AuthUserModel>>( apiUrl );
+    }
+
+    findUserByLicence(licence: string): Observable<AuthUserModel>
+    {
+      const apiUrl=`${environment.apiUrl}/auth/userByLicence/${licence}`;
+      return this.httpClient.get<AuthUserModel>( apiUrl );
     }
 }

@@ -25,6 +25,32 @@
                 <label for="description">Description</label>
             </div>
 
+            <div formGroupName="datesForm">
+
+                <div class="row">
+                    <div class="md-form form-sm form-field">
+                        <mdb-date-picker #datePicker name="dateDebut" [options]="myDatePickerOptions" 
+                            [label]="'Date de debut.'"
+                            [placeholder]="'Debut'" 
+                            [locale]="lang"
+                            formControlName="dateDebut" ></mdb-date-picker>
+                    </div>
+    
+                    <div class="md-form form-sm form-field">
+                        <mdb-date-picker #datePicker name="dateFin" [options]="myDatePickerOptions" 
+                            [label]="'Date de fin.'"
+                            [placeholder]="'Fin'" 
+                            [locale]="lang"
+                            formControlName="dateFin" ></mdb-date-picker>
+                    </div>
+                </div>
+
+                <div id="dates-error" *ngIf="datesForm.dirty && datesForm.hasError('matchingError')" style="color: red;">Les dates ne sont pas successives</div>
+
+            </div>
+
+
+
             <div formGroupName="domainesForm">
                 <div class="row">
 

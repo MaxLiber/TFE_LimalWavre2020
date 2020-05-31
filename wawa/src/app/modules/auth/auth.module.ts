@@ -15,16 +15,25 @@ import { MdBootstrapProModule } from '../../modules.vendors/mdbootstrap/md-boots
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
 import { UserListeComponent } from './user/user-liste/user-liste.component';
+import { FonctionsComponent } from './fonctions/fonctions.component';
+import { FonctionService } from './services/fonction.service';
+import { UserAddComponent } from './user/user-add/user-add.component';
+import { UserEditComponent } from './user/user-edit/user-edit.component';
 //import { ComTranslateModule } from '../../modules.vendors/com.translate/com.translate.module';
+import { IconsModule } from 'ng-uikit-pro-standard';
 
 @NgModule({
   declarations: [
     LoginComponent,
     ChangePasswordComponent,
     UserListeComponent,
+    FonctionsComponent,
+    UserAddComponent,
+    UserEditComponent,
   ],
   imports: [
     CommonModule,
+    IconsModule,
     PasswordStrengthMeterModule,
     AuthRoutingModule,
     // ComTranslateModule,
@@ -41,16 +50,24 @@ import { UserListeComponent } from './user/user-liste/user-liste.component';
   exports: [
     AuthRoutingModule,
     LoginComponent,
+  ],
+  providers: [
+    AuthService,
+    FonctionService,
+    AuthGuard,
   ]
 })
 export class AuthModule {
+  /*
   static forRoot(): ModuleWithProviders {
     return {
         ngModule: AuthModule,
         providers: [
           AuthService,
+          FonctionService,
           AuthGuard,
         ]
       };
   }
+  */
 }

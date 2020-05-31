@@ -1,7 +1,7 @@
 
 <h5>Les domaines:</h5>
 
-<div>
+<!-- <div>
     <h6>Créer un nouveau domaine:</h6>
     <form [formGroup]="domainForm" (ngSubmit)="onCreateDomain()" class="border border-black">
         <div class="domain-form">
@@ -11,6 +11,12 @@
                 <label for="nom">Domaine</label>
             </div>
             
+            <div class="md-form">
+              <i class="fa fa-user prefix grey-text"></i>
+              <input type="text" id="ordre" formControlName="ordre" class="form-control" mdbInput width="300px">
+              <label for="ordre">Ordre affichage</label>
+          </div>
+
             <div class="md-form" fxFlex="50%">
                 <i class="fa fa-envelope prefix grey-text"></i>
                 <input type="text" id="commentaire" formControlName="commentaire" class="form-control" mdbInput>
@@ -25,7 +31,7 @@
         </div>
     </form>
 </div>
-<br>
+<br> -->
 <h6>Liste des domaines:</h6>
 <div *ngIf="domains">
     
@@ -37,7 +43,9 @@
             <th>Domain_ID</th>
             <th>Domaine</th>
             <th>Commentaire</th>
-            <th>Actions</th>
+            <th>Activité</th>
+            <th>Ordre</th>
+            <!-- <th>Actions</th> -->
           </tr>
         </thead>
         <tbody>
@@ -46,7 +54,9 @@
             <th>{{domain.id}}</th>
             <td>{{domain.domain}}</td>
             <td>{{domain.commentaire}}</td>
-            <td>... todo ...</td>
+            <td>{{domain.activity}}</td>
+            <td>{{domain.showOrdre}}</td>
+            <!-- <td>... todo ...</td> -->
           </tr>
         </tbody>
       </table>

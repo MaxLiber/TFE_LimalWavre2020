@@ -1,12 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import * as moment from 'moment';
 
 import { NgModule, NO_ERRORS_SCHEMA, LOCALE_ID} from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // REDUX - ngRx
 import { EffectsModule } from '@ngrx/effects';
@@ -54,24 +55,39 @@ import { ContactModule } from './modules/contact/contact.module';
 import { LocalModule } from './modules/local/local.module';
 import { PrixModule } from './modules/prix/prix.module';
 import { SponsorsModule } from './modules/sponsors/sponsors.module';
+import { RequestInterceptor } from './common/utils/http-interceptor/request.interceptor';
+import { StatusModule } from './modules/status/status.module';
+import { RoiModule } from './modules/roi/roi.module';
+import { NewsletterModule } from './modules/newsletter/newsletter.module';
+import { InterclubsModule } from './modules/interclubs/interclubs.module';
+import { DateAdapter, MAT_DATE_LOCALE, MAT_DATE_FORMATS } from '@angular/material/core';
+import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
 // import { PasswordStrengthMeterModule } from 'angular-password-strength-meter';
 //import { MDBSpinningPreloader } from 'ng-uikit-pro-standard';
 //import { ButtonsModule, WavesModule, CollapseModule } from 'ng-uikit-pro-standard'
 
 // import { PdfViewerModule } from 'ng2-pdf-viewer';
 // import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { DialogConfirmComponent } from './common/utils/dialog-confirm/dialog-confirm.component';
+import { MAT_DIALOG_DEFAULT_OPTIONS } from '@angular/material/dialog';
+import { DialogService } from './common/services/dialog.service';
+import { ActivitesModule } from './modules/activites/activites.module';
+import { ListeService } from './common/services/liste.service';
+import { ClubModule } from './modules/club/club.module';
+import { InactivityTrackerModule } from './modules/inactivity-tracker/inactivity-tracker.module';
 @NgModule({
   declarations: [
     AppComponent,
     AppDefaultComponent,
     MessageComponent,
+    DialogConfirmComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     
-
+    FontAwesomeModule,
     //
     // PasswordStrengthMeterModule,
     FlexLayoutModule,
@@ -101,24 +117,49 @@ import { SponsorsModule } from './modules/sponsors/sponsors.module';
       routerState: RouterState.Minimal
     }),
 
+    //FontAwesomeModule,
+
     // Application Modules
-    AuthModule.forRoot(),
+    //AuthModule.forRoot(),
+    InterclubsModule,
+    AuthModule,
     AppCommonModule,
     AdminModule,
     ContactModule,
     LocalModule,
     PrixModule,
     SponsorsModule,
+    StatusModule,
+    RoiModule,
+    ActivitesModule,
+    NewsletterModule,
+    ClubModule,
+    InactivityTrackerModule,
     // Import the app routing module after the other app modules, so that the routes are merged
     AppRoutingModule, 
   ],
   providers: [
+    ListeService,
+    DialogService,
     MessageService,
-    {provide: LOCALE_ID, useValue: 'fr-CA' }
+    {provide: LOCALE_ID, useValue: 'fr-CA' },
+    {provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true, },
+    {provide: MAT_DATE_LOCALE, useValue: 'fr-BE'},
+    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}},
   ],
   bootstrap: [AppComponent],
+
+  entryComponents: [DialogConfirmComponent],
 
   schemas: [ NO_ERRORS_SCHEMA ]
   
 })
-export class AppModule { }
+export class AppModule 
+{
+  constructor()
+  {
+    moment.locale('fr');
+  }
+}
