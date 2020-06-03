@@ -1,4 +1,4 @@
-export class InterclubsCategory
+export class InterclubsCategoryModel
 {
     id: number;
     name: string;
