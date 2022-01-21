@@ -39,7 +39,7 @@
     "guid": "0.0.12",
     "helmet": "^3.21.2",
     "jsonwebtoken": "^8.5.1",
-    "log4js": "^6.1.0",
+    "log4js": "^6.4.0",
     "multer": "^1.4.2",
     "mysql": "^2.18.1",
     "nest-logger": "^4.0.1",
